@@ -25,15 +25,7 @@ import javax.imageio.ImageIO;
 	public static final int TYPE_GRAY = 3;
 
 	/**
-	 * Resizes an image.
-	 * 
-	 * @param image
-	 *            The image to resize
-	 * @param maxWidth
-	 *            The image's max width
-	 * @param maxHeight
-	 *            The image's max height
-	 * @return A resized <code>BufferedImage
+	 * Redimensiona uma imagem
 	 */
 	public static BufferedImage resizeImage(Image image, int type,
 			int maxWidth, int maxHeight)
@@ -91,11 +83,8 @@ import javax.imageio.ImageIO;
 	}
 
 	/**
-	 * Determines if the image has transparent pixels.
-	 * 
-	 * @param image
-	 *            The image to check for transparent pixel.s
-	 * @throws InterruptedException
+         * Diz se a imagem tem cores transparentes
+         * 
 	 */
 	public static boolean hasAlpha(Image image)
 	{
@@ -183,7 +172,7 @@ import javax.imageio.ImageIO;
 
 	/**
 	 * 
-	 * @return BufferedImage em tom de cinza
+	 * @return BufferedImage
 	 */
 	public static BufferedImage createBufferedImage(int colorType, Image image,
 			int w, int h)

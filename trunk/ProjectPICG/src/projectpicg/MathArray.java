@@ -23,14 +23,8 @@ class MathArray {
     }
 
     /**
-     * This function get the average of the indexes by its values.
-     *
-     * ex: array[1] = 50, array[2] = 60 -> average = (1*50 + 2*60)/3 = 170/3
-     *
-     * @param array the array that contain the values.
-     * @param from the index that will be the start. (inclusive)
-     * @param to the index that will be the end. (inclusive)
-     * @return the average
+     * retorna a media das cores em uma determinada faixa da imagem
+    * 
      */
     public static double getMedia(double array[], int from, int to) {
         double sum = MathArray.sum(array, from, to);
@@ -49,7 +43,6 @@ class MathArray {
     }
 
     /**
-     * @param patternSizeSide1
      * @param i
      * @param j
      * @return

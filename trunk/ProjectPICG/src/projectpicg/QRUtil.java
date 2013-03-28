@@ -17,17 +17,15 @@ public class QRUtil
 	public static int DIAGONAL_L_FIND = 3;
 	public static int DIAGONAL_R_FIND = 4;
 
-	public static List<Square> findSquares(int startX, int startY,
-			BufferedImage bfImage)
+	public static List<Square> findSquares(int startX, int startY, BufferedImage bfImage)
 	{
 		ArrayList<Square> squares = new ArrayList<Square>();
-		final Color[] modelRatio = { Color.BLACK, Color.WHITE, Color.BLACK,
-				Color.WHITE, Color.BLACK };
+		final Color[] modelRatio = { Color.BLACK, Color.WHITE, Color.BLACK};
 		int witdh = bfImage.getWidth();
 		int height = bfImage.getHeight();
 
-		int pirceWidth = witdh - startX; // calculing the width of the pirce
-		int pirceHeight = height - startY; // calculing the height of the pirce
+		int pirceWidth = witdh - startX; // Calculo a largura que irar ser feita a busca
+		int pirceHeight = height - startY; // Calculo a tamanho que irar ser feita a busca
 		int maxSizeOfSquare = Math.min(pirceHeight / 2, pirceWidth / 2);
 
 		int startHeight = 0;
@@ -37,10 +35,10 @@ public class QRUtil
 		{
 			for (Integer j = startHeight; j < bfImage.getHeight(); j++)
 			{
+                            //verifico de ja possuo um quadrado em i, j
 				if (!isOnSquare(squares, i, j))
 				{
-					Square square = findPatern(i, j, bfImage,
-							maxSizeOfSquare, modelRatio);
+					Square square = findPatern(i, j, bfImage,maxSizeOfSquare, modelRatio);
 					if (square != null)
 					{
 						squares.add(square);
@@ -73,9 +71,8 @@ public class QRUtil
 			BufferedImage bfImage, int maxPixelSize,
 			Color[] patern)
 	{
-
-		Integer radiusH = checkPattern( // checking left pattern
-				bfImage, HORIZONTAL_FIND, startX, startY, patern, maxPixelSize);
+             // verifica o parceiro na esquerda
+		Integer radiusH = checkPattern(bfImage, HORIZONTAL_FIND, startX, startY, patern, maxPixelSize);
 
 		if (radiusH != null)
 		{
@@ -101,9 +98,10 @@ public class QRUtil
 							bfImage, DIAGONAL_R_FIND, startX, startY, patern,
 							maxPixelSize);
 
-					if (radiusDR != null)
-						return new Square(radiusH, radiusV, radiusDL,
-								radiusDR, new Point(startX, startY));
+					if (radiusDR != null) {
+                                        return new Square(radiusH, radiusV, radiusDL,
+                                                        radiusDR, new Point(startX, startY));
+                                    }
 				}
 
 			}
@@ -113,7 +111,7 @@ public class QRUtil
 	}
 
 	private static Integer checkPattern(BufferedImage bfImage, int findType,
-			int origenX, int origenY, Color[] patern, int maxPixelSize)
+			int origenX, int origenY, Color[] df, int maxPixelSize)
 	{
 
 		int widht = bfImage.getWidth();
@@ -124,11 +122,13 @@ public class QRUtil
 		// checking the origen color
 		if (colorValue == Color.BLACK.getRGB())
 		{
-			if (patern[0] != Color.BLACK)
-				return null;
-		} else if (colorValue == Color.WHITE.getRGB())
-			if (patern[0] != Color.WHITE)
-				return null;
+			if (df[0] != Color.BLACK) {
+                        return null;
+                    }
+		} else if (colorValue == Color.WHITE.getRGB()) {
+                if (df[0] != Color.WHITE)
+                        return null;
+            }
 
 		List<Integer> patternSizeSide1 = new ArrayList<Integer>();
 		Integer patternSize = 0;
@@ -165,15 +165,15 @@ public class QRUtil
 			}
 
 			if (colorValue == Color.BLACK.getRGB()
-					&& patern[paternIndx] != Color.BLACK)
+					&& df[paternIndx] != Color.BLACK)
 			{
-				paternIndx--;
+				//paternIndx--;
 				int sum = MathArray.sum(patternSizeSide1, 0,
 						patternSizeSide1.size() - 1);
 				patternSize = pixelIndx - sum;
 				patternSizeSide1.add(patternSize);
 			} else if (colorValue == Color.WHITE.getRGB()
-					&& patern[paternIndx] != Color.WHITE)
+					&& df[paternIndx] != Color.WHITE)
 			{
 				paternIndx--;
 				int sum = MathArray.sum(patternSizeSide1, 0,
@@ -226,7 +226,7 @@ public class QRUtil
 			}
 
 			if (colorValue == Color.BLACK.getRGB()
-					&& patern[paternIndx] != Color.BLACK)
+					&& df[paternIndx] != Color.BLACK)
 			{
 				paternIndx--;
 				int sum = MathArray.sum(patternSizeSide2, 0,
@@ -235,7 +235,7 @@ public class QRUtil
 				patternSizeSide2.add(patternSize);
 
 			} else if (colorValue == Color.WHITE.getRGB()
-					&& patern[paternIndx] != Color.WHITE)
+					&& df[paternIndx] != Color.WHITE)
 			{
 				paternIndx--;
 				int sum = MathArray.sum(patternSizeSide2, 0,
